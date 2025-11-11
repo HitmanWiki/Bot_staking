@@ -353,7 +353,7 @@ const AppContent = () => {
   const [lastTxHash, setLastTxHash] = useState(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [lastUpdated, setLastUpdated] = useState(null);
-  const [showApyCalculator, setShowApyCalculator] = useState(false);
+  const [showApyCalculator, setShowApyCalculator] = useState(false); // New state for calculator visibility
 
   // Staking pools
   const stakingPools = [
@@ -687,242 +687,52 @@ const AppContent = () => {
         .text-danger { color: var(--danger-color); }
 
         .app-container {
-          min-height: 100vh;
-          padding: 1rem;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          background-color: var(--bg-light);
-          color: var(--primary-color);
-          font-family: "Burger Free", sans-serif;
-          background-size: cover;
-          background-position: center;
-          background-repeat: no-repeat;
-        }
-        
-        .main-wrapper { 
-          width: 100%; 
-          max-width: 64rem; 
-          margin-left: auto; 
-          margin-right: auto; 
-          z-index: 10; 
-          position: relative; 
-        }
+  min-height: 100vh;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--bg-light);
+  color: var(--primary-color);
+  font-family: "Burger Free", sans-serif;
+  background-size: cover; /* Add this */
+  background-position: center; /* Add this */
+  background-repeat: no-repeat; /* Add this */
+}
+  .main-wrapper { width: 100%; max-width: 64rem; margin-left: auto; margin-right: auto; z-index: 10; position: relative; }
 
-        /* Mobile-first responsive design */
-        .header { 
-          display: flex; 
-          flex-direction: column; 
-          justify-content: space-between; 
-          align-items: center; 
-          background-color: var(--bg-card); 
-          backdrop-filter: blur(8px); 
-          border-radius: 1.5rem; 
-          padding: 1.5rem; 
-          margin-bottom: 2rem; 
-          box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); 
-          border: 4px solid white; 
-          gap: 1rem;
-        }
-        
-        @media (min-width: 640px) { 
-          .header { 
-            flex-direction: row; 
-            gap: 0;
-          } 
-        }
+        .header { display: flex; flex-direction: column; justify-content: space-between; align-items: center; background-color: var(--bg-card); backdrop-filter: blur(8px); border-radius: 1.5rem; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); border: 4px solid white; }
+        @media (min-width: 640px) { .header { flex-direction: row; } }
 
-        .logo-section { 
-          display: flex; 
-          align-items: center; 
-          justify-content: center; 
-        }
-        
-        .logo-image { 
-          width: 3rem; 
-          height: 3rem; 
-          border-radius: 9999px; 
-          border: 4px solid #fb923c; 
-          padding: 0.25rem; 
-          animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; 
-        }
-        
-        @media (min-width: 640px) { 
-          .logo-image { 
-            width: 4rem; 
-            height: 4rem; 
-          } 
-        }
+        .logo-section { display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; gap: 0.5rem; }
+        @media (min-width: 640px) { .logo-section { margin-bottom: 0; } }
+        .logo-image { width: 4rem; height: 4rem; border-radius: 9999px; border: 4px solid #fb923c; padding: 0.25rem; animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        .text-logo-image { height: 2.5rem; width: auto; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1)); }
+        .app-title { font-size: 1.875rem; font-family: "Burger Free", sans-serif;; color:White); text-shadow: 2px 2px 4px rgba(0,0,0,0.1); letter-spacing: 0.05em; margin-left: 1rem; }
 
-        .app-title { 
-          font-size: 1.5rem; 
-          font-family: "Burger Free", sans-serif;; 
-          color: White; 
-          text-shadow: 2px 2px 4px rgba(0,0,0,0.1); 
-          letter-spacing: 0.05em; 
-          margin-left: 1rem; 
-        }
-        
-        @media (min-width: 640px) { 
-          .app-title { 
-            font-size: 1.875rem; 
-          } 
-        }
+        .connect-button { position: relative; display: inline-flex; height: 3rem; width: 100%; align-items: center; justify-content: center; border-radius: 9999px; padding-left: 1.5rem; padding-right: 1.5rem; font-family: "Burger Free", sans-serif;; color: white; transition: all .3s; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); background: linear-gradient(to right, #e633a1ff, #e5008e); }
+        .connect-button:hover { transform: scale(1.05); background: linear-gradient(to right, ); }
+        @media (min-width: 640px) { .connect-button { width: auto; } }
+        .connect-button-content { position: relative; z-index: 10; display: flex; align-items: center; }
+        .icon-mr-2 { margin-right: 0.5rem; } .h-5-w-5 { height: 1.25rem; width: 1.25rem; }
 
-        .connect-button { 
-          position: relative; 
-          display: inline-flex; 
-          height: 3rem; 
-          width: 100%; 
-          align-items: center; 
-          justify-content: center; 
-          border-radius: 9999px; 
-          padding-left: 1.5rem; 
-          padding-right: 1.5rem; 
-          font-family: "Burger Free", sans-serif;; 
-          color: white; 
-          transition: all .3s; 
-          box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); 
-          background: linear-gradient(to right, #e633a1ff, #e5008e); 
-        }
-        
-        @media (min-width: 640px) { 
-          .connect-button { 
-            width: auto; 
-          } 
-        }
-
-        .welcome-content-mobile {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-          width: 100%;
-        }
-        
-        .welcome-content-desktop {
-          display: none;
-        }
-        
-        @media (min-width: 1024px) {
-          .welcome-content-mobile {
-            display: none;
-          }
-          .welcome-content-desktop {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 4rem;
-            width: 100%;
-            max-width: 1200px;
-          }
-        }
-
-        .welcome-logo-mobile {
-          width: 200px;
-          height: 200px;
-          border-radius: 50%;
-          border: 4px solid #1e40af;
-          margin-bottom: 2rem;
-        }
-        
-        .welcome-logo-desktop {
-          width: 300px;
-          height: 300px;
-          border-radius: 50%;
-          border: 6px solid #1e40af;
-        }
-
-        .welcome-title { 
-          font-size: 2rem; 
-          font-family: "Burger Free", sans-serif;; 
-          color: White; 
-          margin-bottom: 1rem; 
-          text-shadow: 2px 2px 4px rgba(0,0,0,0.1); 
-        }
-        
-        @media (min-width: 640px) { 
-          .welcome-title { 
-            font-size: 2.5rem; 
-          } 
-        }
-        
-        @media (min-width: 1024px) { 
-          .welcome-title { 
-            font-size: 3rem; 
-          } 
-        }
-
-        .welcome-message { 
-          color: #10b692ff; 
-          margin-bottom: 2rem; 
-          max-width: 28rem; 
-          font-size: 1.1rem;
-          line-height: 1.5;
-        }
-        
-        @media (min-width: 640px) { 
-          .welcome-message { 
-            font-size: 1.2rem; 
-          } 
-        }
-
-        .button-group {
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-          width: 100%;
-          max-width: 20rem;
-        }
-        
-        @media (min-width: 640px) {
-          .button-group {
-            flex-direction: row;
-            max-width: none;
-          }
-        }
-
-        .welcome-button {
-          font-size: 1.1rem;
-          padding: 1rem 1.5rem;
-          border-radius: 9999px;
-          font-family: "Burger Free", sans-serif;
-          color: white;
-          background: linear-gradient(to right, #e633a1ff, #e5008e);
-          border: none;
-          cursor: pointer;
-          transition: all .3s;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 0.5rem;
-          text-decoration: none;
-          box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-        }
-        
-        .welcome-button:hover {
-          transform: scale(1.05);
-        }
-
-        /* Rest of your existing styles remain the same */
         .connected-wallet { display: flex; align-items: center; background-color: white; padding: 0.5rem 1rem; border-radius: 9999px; border: 2px solid var(--success-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); color: var(--primary-color); font-weight: 700; }
         .connected-wallet .status-indicator { width: 0.5rem; height: 0.5rem; background-color: var(--success-color); border-radius: 9999px; animation: pulse 1.5s cubic-bezier(0.4,0,0.6,1) infinite; margin-left: 0.5rem; }
         .disconnect-button { padding: 0.25rem; border-radius: 9999px; color: #e5008e; transition: color .3s; margin-left: 0.5rem; }
         .disconnect-button:hover { color: var(--primary-color); }
 
         .hero-section { display: flex; justify-content: center; margin-bottom: 1.5rem; }
-        .hero-cat { width: 10rem; height: 10rem; border-radius: 9999px; border: 4px solid var(--primary-color); background-color: white; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); padding: 1rem; display: flex; align-items: center; justify-content: center; animation: bounce-slow 4s ease-in-out infinite; overflow: hidden; }
+        .hero-cat { width: 12rem; height: 12rem; border-radius: 9999px; border: 4px solid var(--primary-color); background-color: white; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); padding: 1rem; display: flex; align-items: center; justify-content: center; animation: bounce-slow 4s ease-in-out infinite; overflow: hidden; }
         @media (min-width: 640px) { .hero-cat { width: 16rem; height: 16rem; } }
         .hero-cat img { width: 100%; height: 100%; object-fit: cover; border-radius: 9999px; }
 
-        .stats-section { background-color: var(--bg-card); backdrop-filter: blur(8px); padding: 1.5rem; border-radius: 1.5rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); border: 4px solid var(--primary-color); color: var(--primary-color); margin-bottom: 1.5rem; }
+        .stats-section { background-color: var(--bg-card); backdrop-filter: blur(8px); padding: 1.5rem; border-radius: 1.5rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); border: 4px solid var(--primary-color); color: var(--primary-color); }
         .stats-section h2 { font-size: 1.5rem; font-family: "Burger Free", sans-serif;; margin-bottom: 1rem; display: flex; align-items: center; }
         .stats-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
         @media (min-width: 640px) { .stats-grid { grid-template-columns: repeat(3, 1fr); } }
         .stat-card { background-color: white; padding: 1rem; border-radius: .75rem; text-align: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); border: 2px solid var(--border-color); }
         .stat-card p.label { font-size: 0.875rem; color: #e5008e; }
-        .stat-card p.value { font-size: 1.5rem; font-weight: 800; font-family: "Burger Free", sans-serif;; margin-top: 0.25rem; }
-        @media (min-width: 640px) { .stat-card p.value { font-size: 1.875rem; } }
+        .stat-card p.value { font-size: 1.875rem; font-weight: 800; font-family: "Burger Free", sans-serif;; margin-top: 0.25rem; }
 
         .staking-pools { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
         @media (min-width: 1024px) { .staking-pools { grid-template-columns: repeat(3, 1fr); } }
@@ -930,83 +740,52 @@ const AppContent = () => {
         .pool-card:hover { transform: scale(1.05); }
         .pool-card::before { content: ''; position: absolute; inset: 0; background-color: var(--secondary-color); opacity: 0; transition: opacity .3s; z-index: 0; }
         .pool-card:hover::before { opacity: .1; }
-        .pool-card h2 { font-size: 1.25rem; font-family: "Burger Free", sans-serif;; color: var(--primary-color); margin-bottom: .5rem; display: flex; align-items: center; position: relative; z-index: 1; }
-        @media (min-width: 640px) { .pool-card h2 { font-size: 1.5rem; } }
-        .pool-card .apy { font-size: 1.5rem; font-family: "Burger Free", sans-serif;; color: var(--secondary-color); margin-bottom: 1rem; position: relative; z-index: 1; }
-        @media (min-width: 640px) { .pool-card .apy { font-size: 1.875rem; } }
-
-        .input-group { position: relative; z-index: 1; margin-bottom: 1rem; }
+        .pool-card h2 { font-size: 1.5rem; font-family: "Burger Free", sans-serif;; color: var(--primary-color); margin-bottom: .5rem; display: flex; align-items: center; position: relative; z-index: 1; }
+        .pool-card .apy { font-size: 1.875rem; font-family: "Burger Free", sans-serif;; color: var(--secondary-color); margin-bottom: 1rem; position: relative; z-index: 1; }
+        .input-group { position: relative; z-index: 1; }
         .input-group p { font-size: .875rem; color: #e5008e; margin-bottom: .5rem; }
-        .input-flex { display: flex; flex-direction: column; gap: .5rem; }
-        @media (min-width: 640px) { .input-flex { flex-direction: row; } }
-        .input-field { flex-grow: 1; background-color: white; color: var(--primary-color); padding: .75rem; border-radius: .75rem; border: 2px solid var(--border-color); transition: all .3s; font-family: "Burger Free", sans-serif;; font-size: 1rem; }
-        @media (min-width: 640px) { .input-field { font-size: 1.125rem; } }
-        .input-field:focus { outline: none; border-color: var(--primary-color); }
-
-        .stake-button, .unstake-button, .claim-button { 
-          padding: .75rem 1.5rem; 
-          border-radius: .75rem; 
-          font-family: "Burger Free", sans-serif;; 
-          color: white; 
-          transition: transform .2s, background-color .2s; 
-          box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); 
-          border: none;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 0.5rem;
-          font-size: 0.9rem;
-        }
-        
-        @media (min-width: 640px) {
-          .stake-button, .unstake-button, .claim-button {
-            font-size: 1rem;
-          }
-        }
-
-        .stake-button { background-color: var(--primary-color); }
+        .input-flex { display: flex; gap: .5rem; }
+        .input-field { flex-grow: 1; background-color: white; color: var(--primary-color); padding: .75rem; border-radius: .75rem; border: 2px solid var(--border-color); transition: all .3s; font-family: "Burger Free", sans-serif;; font-size: 1.125rem; }
+        .input-field:focus { outline: none; }
+        .stake-button { padding: .75rem 1.5rem; border-radius: .75rem; font-family: "Burger Free", sans-serif;; color: white; background-color: var(--primary-color); transition: transform .2s, background-color .2s; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); }
         .stake-button:hover { background-color: #1e3a8a; }
-        .unstake-button { background-color: #e5008e; }
+        .stake-button:active { transform: scale(0.95); }
+        .stake-button:disabled { background-color: #9ca3af; cursor: not-allowed; }
+        .unstake-button { padding: .75rem 1.5rem; border-radius: .75rem; font-family: "Burger Free", sans-serif;; color: white; background-color: #e5008e; transition: transform .2s, background-color .2s; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); }
         .unstake-button:hover { background-color: #b91c1c; }
-        .claim-button { background-color: var(--success-color); }
-        .claim-button:hover { background-color: #1e3a8a; }
+        .unstake-button:active { transform: scale(0.95); }
+        .unstake-button:disabled { background-color: #9ca3af; cursor: not-allowed; }
 
         .claim-section { background-color: var(--bg-card); backdrop-filter: blur(8px); padding: 1.5rem; border-radius: 1.5rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); border: 4px solid var(--success-color); margin-top: 1.5rem; color: var(--primary-color); }
         .claim-section h2 { font-size: 1.5rem; font-family: "Burger Free", sans-serif;; color: var(--primary-color); margin-bottom: 1rem; display: flex; align-items: center; }
+        .claim-button { width: 100%; display: flex; align-items: center; justify-content: center; padding: .75rem; border-radius: .75rem; font-family: "Burger Free", sans-serif;; font-size: 1.125rem; transition: all .3s; background-color: var(--success-color); color: white; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); }
+        .claim-button:hover { transform: scale(1.05); box-shadow: 0 10px 15px -3px rgba(0,200,100,0.5); }
+        .claim-button:active { transform: scale(1); }
+        .claim-button:disabled { background-color: #9ca3af; cursor: not-allowed; transform: none; box-shadow: none; }
 
-        .welcome-message-container { 
-          display: flex; 
-          flex-direction: column; 
-          align-items: center; 
-          justify-content: center; 
-          min-height: 60vh; 
-          text-align: center; 
-          animation: fade-in 1s ease-in-out; 
-          color: var(--primary-color);
-          width: 100%;
-          padding: 1rem;
-        }
+        .welcome-message-container { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 60vh; text-align: center; animation: fade-in 1s ease-in-out; color: var(--primary-color); }
+        .welcome-title { font-size: 3rem; font-family: "Burger Free", sans-serif;; color: White; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }
+        .welcome-message { color: #10b692ff; margin-bottom: 2rem; max-width: 28rem; }
 
-        .modal-overlay { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; background-color: rgba(0,0,0,0.75); padding: 1rem; }
-        .modal-container { position: relative; padding: 1.5rem; border-radius: 1rem; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04); max-width: 24rem; width: 100%; margin: 0 auto; transform: scale(1); transition: all .2s; text-align: center; }
+        .modal-overlay { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; background-color: rgba(0,0,0,0.75); }
+        .modal-container { position: relative; padding: 1.5rem; border-radius: 1rem; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04); max-width: 24rem; width: 100%; margin: 0 1rem; transform: scale(1); transition: all .2s; text-align: center; }
         .modal-container.success { background-color: var(--success-color); color: white; }
         .modal-container.error { background-color: var(--danger-color); color: white; }
-        .modal-close-button { position: absolute; top: .5rem; right: .5rem; color: white; background: none; border: none; cursor: pointer; }
+        .modal-close-button { position: absolute; top: .5rem; right: .5rem; color: white; }
         .modal-title { font-size: 1.5rem; font-weight: 700; font-family: "Burger Free", sans-serif;; margin-bottom: .5rem; }
         .modal-text { font-family: "Burger Free", sans-serif;; }
 
-        .footer { margin-top: 2rem; padding-top: 1.5rem; text-align: center; color: #e5008e; border-top: 2px solid var(--primary-color); width: 100%; }
+        .footer { margin-top: 2rem; padding-top: 1.5rem; text-align: center; color: #e5008e; border-top: 2px solid var(--primary-color); }
         .quote-text { font-size: .875rem; font-style: italic; }
 
-        .refresh-button { position: fixed; bottom: 2rem; right: 2rem; background-color: var(--primary-color); color: white; width: 3rem; height: 3rem; border-radius: 9999px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); cursor: pointer; transition: all .2s; z-index: 20; border: none; }
+        .refresh-button { position: fixed; bottom: 2rem; right: 2rem; background-color: var(--primary-color); color: white; width: 3rem; height: 3rem; border-radius: 9999px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); cursor: pointer; transition: all .2s; z-index: 20; }
         .refresh-button:hover { transform: rotate(180deg); background-color: #1e3a8a; }
         .refresh-button:active { transform: rotate(180deg) scale(0.95); }
         .refresh-button.loading { animation: spin 1s linear infinite; }
 
         .last-updated { font-size: 0.75rem; color: #e5008e; text-align: right; margin-top: 0.5rem; }
 
-        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.5} }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.5} }s
         @keyframes bounce-slow { 0%,100%{ transform: translateY(-5%) } 50%{ transform: translateY(0) } }
         @keyframes fade-in { 0%{opacity:0} 100%{opacity:1} }
         @keyframes spin { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
@@ -1016,23 +795,20 @@ const AppContent = () => {
         {/* Header */}
         <header className="header">
           <div className="logo-section">
-            <img src={logoUrl} alt="BOT LOGO" className="logo-image" />
-            <h1 className="app-title">BOT Staking</h1>
+            <img src={logoUrl} alt="BOT LOGO" className="logo-image animate-pulse" />
           </div>
 
           {isConnected ? (
             <div className="connected-wallet">
-              <Wallet style={{ marginRight: '0.5rem', color: 'var(--success-color)' }} />
-              <span>{shortAddress(address)}</span>
+              <Wallet className="icon-mr-2" style={{ color: 'var(--success-color)' }} />
+              <span className="font-bold hidden-sm">{shortAddress(address)}</span>
+              <span className="font-bold visible-sm">Connected</span>
               <div className="status-indicator"></div>
-              <button onClick={disconnect} className="disconnect-button">
-                <LogOut size={20} />
-              </button>
+              <button onClick={disconnect} className="disconnect-button"><LogOut size={20} /></button>
             </div>
           ) : (
             <button onClick={() => open()} className="connect-button">
-              <Wallet style={{ marginRight: '0.5rem' }} />
-              Connect Wallet
+              <span className="connect-button-content"><Wallet className="icon-mr-2 h-5-w-5" />Connect Wallet</span>
             </button>
           )}
         </header>
@@ -1042,18 +818,16 @@ const AppContent = () => {
           <main>
             {/* Hero Cat GIF */}
             <div className="hero-section">
-              <div className="hero-cat">
-                <img src={gifUrl} alt="A cute cat GIF" />
-              </div>
+              <div className="hero-cat"><img src={gifUrl} alt="A cute cat GIF" /></div>
             </div>
+
+            {/* APY Calculator */}
+            {/* <ApyCalculator stakingPools={stakingPools} /> */}
 
             {/* Balances & Rewards */}
             <div className="stats-section">
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-                <h2>
-                  <Cat style={{ marginRight: '0.5rem' }} /> 
-                  Your BOT Staking Stats
-                </h2>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h2><Cat style={{ marginRight: '0.5rem' }} /> Your BOT Staking Stats</h2>
                 {isRefreshing && (
                   <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Loader className="animate-spin" style={{ marginRight: '0.5rem' }} />
@@ -1061,46 +835,48 @@ const AppContent = () => {
                   </div>
                 )}
               </div>
-              
               <div className="stats-grid">
                 <div className="stat-card">
                   <p className="label">Available Balance</p>
                   <p className="value">{formattedTokenBalance.toFixed(2)}</p>
-                  <p style={{ fontSize: '0.75rem', color: '#1e3a8a', marginTop: '0.25rem' }}>BOT Tokens</p>
+                  <p style={{ fontSize: '0.75rem', fontFamily: 'Inter, sans-serif', color: '#1e3a8a', marginTop: '0.25rem' }}>BOT Tokens</p>
                 </div>
                 <div className="stat-card">
                   <p className="label">Your Total Staked</p>
                   <p className="value">{totalStakedUser.toFixed(2)}</p>
-                  <p style={{ fontSize: '0.75rem', color: '#1e3a8a', marginTop: '0.25rem' }}>BOT Tokens</p>
+                  <p style={{ fontSize: '0.75rem', fontFamily: 'Inter, sans-serif', color: '#1e3a8a', marginTop: '0.25rem' }}>BOT Tokens</p>
                 </div>
                 <div className="stat-card">
                   <p className="label">Your Total Claimable</p>
                   <p className="value" style={{ color: 'var(--success-color)' }}>{totalUserRewards.toFixed(2)}</p>
-                  <p style={{ fontSize: '0.75rem', color: '#1e3a8a', marginTop: '0.25rem' }}>BOT Tokens</p>
+                  <p style={{ fontSize: '0.75rem', fontFamily: 'Inter, sans-serif', color: '#1e3a8a', marginTop: '0.25rem' }}>BOT Tokens (sum of pools)</p>
                 </div>
               </div>
 
               {/* Contract-level info row */}
               <div className="stats-grid" style={{ marginTop: '1rem' }}>
                 <div className="stat-card">
-                  <p className="label">Reward Pool</p>
-                  <p className="value">{formattedAvailableRwds.toFixed(2)}</p>
-                  <p style={{ fontSize: '0.75rem', color: '#1e3a8a', marginTop: '0.25rem' }}>BOT Available</p>
+                  <p className="label">Reward Pool (Admin-Funded)</p>
+                  <p className="value" title="rewardReserve()">
+                    {formattedAvailableRwds.toFixed(2)}
+                  </p>
+                  <p style={{ fontSize: '0.75rem', fontFamily: 'Inter, sans-serif', color: '#1e3a8a', marginTop: '0.25rem' }}>
+                    BOT Available for Rewards
+                  </p>
                 </div>
                 <div className="stat-card">
-                  <p className="label">Total Staked (All)</p>
+                  <p className="label">Total Staked (All Users)</p>
                   <p className="value">{formattedTotalStakedAll.toFixed(2)}</p>
-                  <p style={{ fontSize: '0.75rem', color: '#1e3a8a', marginTop: '0.25rem' }}>BOT in contract</p>
+                  <p style={{ fontSize: '0.75rem', fontFamily: 'Inter, sans-serif', color: '#1e3a8a', marginTop: '0.25rem' }}>BOT in contract</p>
                 </div>
                 <div className="stat-card">
                   <p className="label">Wallet</p>
                   <p className="value" style={{ display: 'flex', gap: '.5rem', alignItems: 'center', justifyContent: 'center' }}>
                     <Wallet /> {shortAddress(address)}
                   </p>
-                  <p style={{ fontSize: '0.75rem', color: '#1e3a8a', marginTop: '0.25rem' }}>Connected</p>
+                  <p style={{ fontSize: '0.75rem', fontFamily: 'Inter, sans-serif', color: '#1e3a8a', marginTop: '0.25rem' }}>Connected</p>
                 </div>
               </div>
-              
               {lastUpdated && (
                 <p className="last-updated">
                   Last updated: {lastUpdated.toLocaleTimeString()}
@@ -1109,7 +885,7 @@ const AppContent = () => {
             </div>
 
             {/* Pools */}
-            <div className="staking-pools">
+            <div className="staking-pools" style={{ marginTop: '1.5rem' }}>
               {stakingPools.map((pool) => {
                 const stakedAmt = pool.id === '7-day' ? formattedStaked7 : pool.id === '14-day' ? formattedStaked14 : formattedStaked21;
                 const rewardsAmt = pool.id === '7-day' ? formattedRewards7 : pool.id === '14-day' ? formattedRewards14 : formattedRewards21;
@@ -1118,14 +894,14 @@ const AppContent = () => {
                     <h2><Gift style={{ marginRight: '0.5rem' }} /> {pool.duration} Pool</h2>
                     <p className="apy">{pool.apy}% APY</p>
 
-                    <div className="input-group">
+                    <div className="input-group" style={{ marginBottom: '1rem' }}>
                       <p>Your staked amount:</p>
-                      <p style={{ fontSize: '1.25rem', fontWeight: 'bold' }}>
+                      <p style={{ fontSize: '1.25rem', fontWeight: 'bold', fontFamily: '"Burger Free", sans-serif;' }}>
                         {stakedAmt.toFixed(2)} BOT
                       </p>
                     </div>
 
-                    <div className="input-group">
+                    <div className="input-group" style={{ marginBottom: '1rem' }}>
                       <p>Stake BOT</p>
                       <div className="input-flex">
                         <input
@@ -1135,60 +911,63 @@ const AppContent = () => {
                           placeholder="0.0"
                           className="input-field"
                         />
-                        <button 
-                          onClick={() => handleStake(pool.id)} 
-                          disabled={isTxPending || !stakeInputs[pool.id]} 
-                          className="stake-button"
-                        >
+                        <button onClick={() => handleStake(pool.id)} disabled={isTxPending || !stakeInputs[pool.id]} className="stake-button">
                           {isTxPending ? <Loader className="animate-spin" /> : 'Stake'}
                         </button>
                       </div>
                     </div>
 
-                    <div className="input-group">
+                    <div className="input-group" style={{ marginBottom: '1rem' }}>
                       <p>Claimable Rewards:</p>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '.5rem' }}>
-                        <p style={{ fontSize: '1.25rem', fontWeight: 'bold' }}>
+                      <div style={{ display: 'flex', gap: '.5rem', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <p style={{ fontSize: '1.25rem', fontWeight: 'bold', fontFamily: '"Burger Free", sans-serif;' }}>
                           {rewardsAmt.toFixed(6)} BOT
                         </p>
                         <button
                           onClick={() => handleClaimRewards(pool.id)}
                           disabled={isTxPending || rewardsAmt <= 0}
                           className="claim-button"
+                          style={{ width: '50%' }}
                         >
                           {isTxPending ? (
-                            <Loader className="animate-spin" />
+                            <Loader className="animate-spin" style={{ width: '1.25rem', height: '1.25rem', marginRight: '0.5rem' }} />
                           ) : (
-                            <Handshake style={{ width: '1.25rem', height: '1.25rem' }} />
+                            <Handshake style={{ width: '1.25rem', height: '1.25rem', marginRight: '0.5rem' }} />
                           )}
                           {isTxPending ? 'Claiming...' : 'Claim'}
                         </button>
                       </div>
                       <p style={{ fontSize: '.8rem', color: '#1e3a8a', marginTop: '.25rem' }}>
-                        Rewards are paid from the admin-funded pool.
+                        Rewards are paid from the admin-funded pool. If it's empty, claims will revert but your stake remains safe.
                       </p>
                     </div>
 
-                    <div className="input-group">
+                    <div className="input-group" style={{ marginBottom: '0.5rem' }}>
                       <p>Unstake All BOT</p>
-                      <button
-                        onClick={() => handleUnstake(pool.id)}
-                        disabled={isTxPending || stakedAmt <= 0}
-                        className="unstake-button"
-                      >
-                        {isTxPending ? <Loader className="animate-spin" /> : 'Unstake'}
-                      </button>
+                      <div className="input-flex">
+                        <button
+                          onClick={() => handleUnstake(pool.id)}
+                          disabled={isTxPending || stakedAmt <= 0}
+                          className="unstake-button"
+                          style={{ width: '100%' }}
+                        >
+                          {isTxPending ? <Loader className="animate-spin" /> : 'Unstake'}
+                        </button>
+                      </div>
                     </div>
 
                     <div className="input-group">
                       <p>Emergency Unstake (15% Penalty)</p>
-                      <button
-                        onClick={() => handleEmergencyUnstake(pool.id)}
-                        disabled={isTxPending || stakedAmt <= 0}
-                        className="unstake-button"
-                      >
-                        {isTxPending ? <Loader className="animate-spin" /> : 'Emergency Unstake'}
-                      </button>
+                      <div className="input-flex">
+                        <button
+                          onClick={() => handleEmergencyUnstake(pool.id)}
+                          disabled={isTxPending || stakedAmt <= 0}
+                          className="unstake-button"
+                          style={{ width: '100%' }}
+                        >
+                          {isTxPending ? <Loader className="animate-spin" /> : 'Emergency Unstake'}
+                        </button>
+                      </div>
                     </div>
                   </div>
                 );
@@ -1199,113 +978,107 @@ const AppContent = () => {
             <div className="claim-section">
               <h2><PiggyBank style={{ marginRight: '0.5rem' }} /> Claim All Rewards</h2>
               <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-                <p style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{totalUserRewards.toFixed(6)} BOT</p>
-                <p style={{ fontSize: '0.875rem', color: '#e5008e' }}>sum across all pools</p>
+                <p style={{ fontSize: '1.5rem', fontWeight: 'bold', fontFamily: '"Burger Free", sans-serif;' }}>{totalUserRewards.toFixed(6)} BOT</p>
+                <p style={{ fontSize: '0.875rem', fontFamily: 'Inter, sans-serif', color: '#e5008e' }}>sum across all pools</p>
               </div>
               <button
                 onClick={handleClaimAllRewards}
                 disabled={isTxPending || totalUserRewards <= 0}
                 className="claim-button"
               >
-                <Handshake style={{ width: '1.25rem', height: '1.25rem' }} />
+                <Handshake style={{ width: '1.25rem', height: '1.25rem', marginRight: '0.5rem' }} />
                 {isTxPending ? 'Claiming All...' : 'Claim All Rewards'}
               </button>
             </div>
           </main>
         ) : (
-          // Welcome Page - Mobile First Design
           <div className="welcome-message-container">
-            {/* Mobile Layout */}
-            <div className="welcome-content-mobile">
-              <img src={logoUrl} alt="BOT LOGO" className="welcome-logo-mobile" />
-              
-              <h1 className="welcome-title">
-                Welcome to BOT Staking!
-              </h1>
-              
-              <p className="welcome-message">
-                Connect your wallet to start staking your BOT tokens and earn rewards. It's time to put your tokens to work!
-              </p>
-              
-              <div className="button-group">
-                <button onClick={() => open()} className="welcome-button">
-                  <Wallet />
-                  Connect Wallet
-                </button>
-                
-                <button
-                  onClick={() => setShowApyCalculator(true)}
-                  className="welcome-button"
-                >
-                  <Calculator />
-                  APY Calculator
-                </button>
-              </div>
+  {/* Main content container with logo on the right */}
+  <div style={{ 
+    display: 'flex', 
+    alignItems: 'center', 
+    justifyContent: 'space-between', 
+    gap: '6rem', // Increased distance
+    width: '100%',
+    maxWidth: '1200px', // Increased max width
+    margin: '0 auto'
+  }}>
+    
+    {/* Left side - All the content */}
+    <div style={{ 
+      display: 'flex', 
+      flexDirection: 'column', 
+      alignItems: 'center',
+      flex: 1,
+      textAlign: 'center'
+    }}>
+      <h1 className="welcome-title" style={{ marginBottom: '2rem' }}>
+        Welcome to BOT Staking!
+      </h1>
+      
+      <p className="welcome-message" style={{ marginBottom: '2.5rem', fontSize: '1.3rem' }}>
+        Connect your wallet to start staking your BOT tokens and earn rewards. It's time to put your tokens to work!
+      </p>
+      
+      <button onClick={() => open()} className="connect-button" style={{ marginBottom: '1.5rem', fontSize: '1.2rem', padding: '1rem 2rem' }}>
+        <span className="connect-button-content">
+          <Wallet className="icon-mr-2 h-5-w-5" />
+          Connect Wallet
+        </span>
+      </button>
+      
+      <button
+        onClick={() => setShowApyCalculator(true)}
+        className="connect-button"
+        style={{ fontSize: '1.2rem', padding: '1rem 2rem' }}
+      >
+        <span className="connect-button-content">
+          <Calculator className="icon-mr-2 h-5-w-5" />
+          Open APY Calculator
+        </span>
+      </button>
 
-              {/* APY Calculator for non-connected users */}
-              {showApyCalculator && (
-                <div style={{ width: '100%', maxWidth: '28rem', marginTop: '2rem' }}>
-                  <ApyCalculator stakingPools={stakingPools} onClose={() => setShowApyCalculator(false)} />
-                </div>
-              )}
-            </div>
+      {/* APY Calculator for non-connected users */}
+      {showApyCalculator && (
+        <div style={{ width: '100%', maxWidth: '28rem', marginTop: '2rem' }}>
+          <ApyCalculator stakingPools={stakingPools} onClose={() => setShowApyCalculator(false)} />
+        </div>
+      )}
+    </div>
 
-            {/* Desktop Layout */}
-            <div className="welcome-content-desktop">
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: 1, textAlign: 'center' }}>
-                <h1 className="welcome-title">
-                  Welcome to BOT Staking!
-                </h1>
-                
-                <p className="welcome-message">
-                  Connect your wallet to start staking your BOT tokens and earn rewards. It's time to put your tokens to work!
-                </p>
-                
-                <div className="button-group">
-                  <button onClick={() => open()} className="welcome-button">
-                    <Wallet />
-                    Connect Wallet
-                  </button>
-                  
-                  <button
-                    onClick={() => setShowApyCalculator(true)}
-                    className="welcome-button"
-                  >
-                    <Calculator />
-                    APY Calculator
-                  </button>
-                </div>
-
-                {/* APY Calculator for non-connected users */}
-                {showApyCalculator && (
-                  <div style={{ width: '100%', maxWidth: '28rem', marginTop: '2rem' }}>
-                    <ApyCalculator stakingPools={stakingPools} onClose={() => setShowApyCalculator(false)} />
-                  </div>
-                )}
-              </div>
-
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                <img 
-                  src={logoUrl} 
-                  alt="BOT LOGO" 
-                  className="welcome-logo-desktop"
-                />
-              </div>
-            </div>
-          </div>
+    {/* Right side - Larger Logo */}
+    <div style={{ 
+      display: 'flex', 
+      alignItems: 'center', 
+      justifyContent: 'center',
+      flexShrink: 0,
+      marginLeft: '4rem' // Additional margin for more distance
+    }}>
+      <img 
+        src={logoUrl} 
+        alt="BOT LOGO" 
+        style={{ 
+          width: '350px', // Much larger logo
+          height: '350px', // Much larger logo
+          borderRadius: '50%', 
+          border: '6px solid #1e40af', // Thicker border
+          padding: '0.5rem',
+          // animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          boxShadow: '0 10px 25px rgba(0, 0, 0, 0.3)'
+        }} 
+      />
+    </div>
+  </div>
+</div>
         )}
 
         {/* Modal */}
         {showModal && (
           <div className="modal-overlay">
             <div className={`modal-container ${modalType === 'success' ? 'success' : 'error'}`}>
-              <button onClick={() => setShowModal(false)} className="modal-close-button">
-                <XCircle size={24} />
-              </button>
+              <button onClick={() => setShowModal(false)} className="modal-close-button"><XCircle size={24} /></button>
               <div>
-                <h3 className="modal-title">
-                  {modalType === 'success' ? 'Bot-ificent!' : 'Oh no!'}
-                </h3>
+                <h3 className="modal-title">{modalType === 'success' ? 'Bot-ificent!' : 'Oh no!'}</h3>
                 <p className="modal-text">{modalMessage}</p>
               </div>
             </div>
