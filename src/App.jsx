@@ -789,6 +789,209 @@ const AppContent = () => {
         @keyframes bounce-slow { 0%,100%{ transform: translateY(-5%) } 50%{ transform: translateY(0) } }
         @keyframes fade-in { 0%{opacity:0} 100%{opacity:1} }
         @keyframes spin { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
+
+        /* Welcome Page Responsive Styles */
+.welcome-message-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  text-align: center;
+  animation: fade-in 1s ease-in-out;
+  color: var(--primary-color);
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.welcome-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.welcome-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  text-align: center;
+  width: 100%;
+}
+
+.welcome-title {
+  font-size: 2.5rem;
+  font-family: "Burger Free", sans-serif;
+  color: white;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  line-height: 1.2;
+  word-wrap: break-word;
+}
+
+.welcome-message {
+  color: #10b692;
+  margin-bottom: 2.5rem;
+  max-width: 28rem;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  width: 100%;
+}
+
+.welcome-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 300px;
+  justify-content: center;
+}
+
+.welcome-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.logo-image-responsive {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 4px solid #1e40af;
+  padding: 0.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.calculator-container {
+  width: 100%;
+  max-width: 28rem;
+  margin-top: 2rem;
+}
+
+/* Tablet Styles */
+@media (min-width: 768px) {
+  .welcome-content-wrapper {
+    flex-direction: row;
+    gap: 4rem;
+  }
+  
+  .welcome-title {
+    font-size: 3rem;
+  }
+  
+  .welcome-message {
+    font-size: 1.3rem;
+  }
+  
+  .welcome-buttons {
+    flex-direction: row;
+    max-width: 400px;
+  }
+  
+  .logo-image-responsive {
+    width: 280px;
+    height: 280px;
+    border-width: 5px;
+  }
+}
+
+/* Desktop Styles */
+@media (min-width: 1024px) {
+  .welcome-content-wrapper {
+    gap: 6rem;
+  }
+  
+  .logo-image-responsive {
+    width: 350px;
+    height: 350px;
+    border-width: 6px;
+  }
+  
+  .welcome-content {
+    text-align: left;
+    align-items: flex-start;
+  }
+  
+  .welcome-buttons {
+    justify-content: flex-start;
+  }
+}
+
+/* Large Desktop Styles */
+@media (min-width: 1280px) {
+  .welcome-content-wrapper {
+    gap: 8rem;
+  }
+}
+
+/* Very small mobile devices */
+@media (max-width: 360px) {
+  .welcome-title {
+    font-size: 2rem;
+  }
+  
+  .welcome-message {
+    font-size: 1rem;
+  }
+  
+  .logo-image-responsive {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .welcome-message-container {
+    padding: 0.5rem;
+  }
+}
+
+/* Button specific responsive styles */
+.connect-button {
+  position: relative;
+  display: inline-flex;
+  height: 3rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  font-family: "Burger Free", sans-serif;
+  color: white;
+  transition: all .3s;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+  background: linear-gradient(to right, #e633a1ff, #e5008e);
+  white-space: nowrap;
+  min-width: fit-content;
+  width: 100%;
+}
+
+@media (min-width: 480px) {
+  .connect-button {
+    width: auto;
+  }
+}
+
+.connect-button:hover {
+  transform: scale(1.05);
+}
+
+.connect-button-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+}
+
+.calculator-button {
+  background: linear-gradient(to right, #1e40af, #3b82f6);
+}
+
       `}</style>
 
       <div className="main-wrapper">
@@ -992,16 +1195,18 @@ const AppContent = () => {
             </div>
           </main>
         ) : (
-          <div className="welcome-message-container">
-  {/* Main content container with logo on the right */}
+ <div className="welcome-message-container">
+  {/* Main content container with responsive layout */}
   <div style={{ 
     display: 'flex', 
+    flexDirection: window.innerWidth < 1024 ? 'column' : 'row', // Column on mobile, row on desktop
     alignItems: 'center', 
     justifyContent: 'space-between', 
-    gap: '6rem', // Increased distance
+    gap: window.innerWidth < 1024 ? '3rem' : '6rem', // Smaller gap on mobile
     width: '100%',
-    maxWidth: '1200px', // Increased max width
-    margin: '0 auto'
+    maxWidth: '1200px',
+    margin: '0 auto',
+    padding: window.innerWidth < 768 ? '0 1rem' : '0' // Add padding on mobile
   }}>
     
     {/* Left side - All the content */}
@@ -1010,61 +1215,94 @@ const AppContent = () => {
       flexDirection: 'column', 
       alignItems: 'center',
       flex: 1,
-      textAlign: 'center'
+      textAlign: 'center',
+      order: window.innerWidth < 1024 ? 2 : 1 // Content first on mobile, original order on desktop
     }}>
-      <h1 className="welcome-title" style={{ marginBottom: '2rem' }}>
+      <h1 className="welcome-title" style={{ 
+        marginBottom: '2rem',
+        fontSize: window.innerWidth < 768 ? '2.5rem' : '3rem', // Smaller on mobile
+        textAlign: 'center'
+      }}>
         Welcome to BOT Staking!
       </h1>
       
-      <p className="welcome-message" style={{ marginBottom: '2.5rem', fontSize: '1.3rem' }}>
+      <p className="welcome-message" style={{ 
+        marginBottom: '2.5rem', 
+        fontSize: window.innerWidth < 768 ? '1.1rem' : '1.3rem', // Smaller on mobile
+        maxWidth: '100%',
+        lineHeight: '1.5'
+      }}>
         Connect your wallet to start staking your BOT tokens and earn rewards. It's time to put your tokens to work!
       </p>
       
-      <button onClick={() => open()} className="connect-button" style={{ marginBottom: '1.5rem', fontSize: '1.2rem', padding: '1rem 2rem' }}>
-        <span className="connect-button-content">
-          <Wallet className="icon-mr-2 h-5-w-5" />
-          Connect Wallet
-        </span>
-      </button>
-      
-      <button
-        onClick={() => setShowApyCalculator(true)}
-        className="connect-button"
-        style={{ fontSize: '1.2rem', padding: '1rem 2rem' }}
-      >
-        <span className="connect-button-content">
-          <Calculator className="icon-mr-2 h-5-w-5" />
-          Open APY Calculator
-        </span>
-      </button>
+      <div style={{ 
+        display: 'flex', 
+        flexDirection: window.innerWidth < 480 ? 'column' : 'row', // Column on very small screens
+        gap: '1rem',
+        width: '100%',
+        maxWidth: window.innerWidth < 480 ? '300px' : '400px',
+        justifyContent: 'center'
+      }}>
+        <button onClick={() => open()} className="connect-button" style={{ 
+          fontSize: window.innerWidth < 768 ? '1.1rem' : '1.2rem', 
+          padding: window.innerWidth < 768 ? '0.875rem 1.5rem' : '1rem 2rem',
+          width: window.innerWidth < 480 ? '100%' : 'auto'
+        }}>
+          <span className="connect-button-content">
+            <Wallet className="icon-mr-2 h-5-w-5" />
+            Connect Wallet
+          </span>
+        </button>
+        
+        <button
+          onClick={() => setShowApyCalculator(true)}
+          className="connect-button"
+          style={{ 
+            fontSize: window.innerWidth < 768 ? '1.1rem' : '1.2rem', 
+            padding: window.innerWidth < 768 ? '0.875rem 1.5rem' : '1rem 2rem',
+            width: window.innerWidth < 480 ? '100%' : 'auto'
+          }}
+        >
+          <span className="connect-button-content">
+            <Calculator className="icon-mr-2 h-5-w-5" />
+            APY Calculator
+          </span>
+        </button>
+      </div>
 
       {/* APY Calculator for non-connected users */}
       {showApyCalculator && (
-        <div style={{ width: '100%', maxWidth: '28rem', marginTop: '2rem' }}>
+        <div style={{ 
+          width: '100%', 
+          maxWidth: window.innerWidth < 768 ? '100%' : '28rem', 
+          marginTop: '2rem' 
+        }}>
           <ApyCalculator stakingPools={stakingPools} onClose={() => setShowApyCalculator(false)} />
         </div>
       )}
     </div>
 
-    {/* Right side - Larger Logo */}
+    {/* Right side - Responsive Logo */}
     <div style={{ 
       display: 'flex', 
       alignItems: 'center', 
       justifyContent: 'center',
       flexShrink: 0,
-      marginLeft: '4rem' // Additional margin for more distance
+      marginLeft: window.innerWidth < 1024 ? '0' : '4rem',
+      order: window.innerWidth < 1024 ? 1 : 2, // Logo first on mobile, second on desktop
+      marginBottom: window.innerWidth < 1024 ? '1rem' : '0'
     }}>
       <img 
         src={logoUrl} 
         alt="BOT LOGO" 
         style={{ 
-          width: '350px', // Much larger logo
-          height: '350px', // Much larger logo
+          width: window.innerWidth < 768 ? '250px' : window.innerWidth < 1024 ? '300px' : '350px', // Responsive sizing
+          height: window.innerWidth < 768 ? '250px' : window.innerWidth < 1024 ? '300px' : '350px', // Responsive sizing
           borderRadius: '50%', 
-          border: '6px solid #1e40af', // Thicker border
+          border: window.innerWidth < 768 ? '4px solid #1e40af' : '6px solid #1e40af', // Thinner border on mobile
           padding: '0.5rem',
-          // animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-          boxShadow: '0 10px 25px rgba(0, 0, 0, 0.3)'
+          boxShadow: '0 10px 25px rgba(0, 0, 0, 0.3)',
+          maxWidth: '100%' // Ensure it doesn't overflow on very small screens
         }} 
       />
     </div>
