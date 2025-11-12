@@ -11,7 +11,7 @@ import { parseUnits, formatUnits, maxUint256 } from 'viem';
  * 🧩 Addresses — REPLACE THESE
  ************************************/
 const BOT_TOKEN_ADDRESS = '0x25bdadB27A3C278E626561A73324985EEd743DB9';
-const STAKING_CONTRACT_ADDRESS = '';
+const STAKING_CONTRACT_ADDRESS = '0xe5b6e6db908a930df481dce4927507d47e78fb0c';
 const TOKEN_DECIMALS = 18;
 
 /************************************
